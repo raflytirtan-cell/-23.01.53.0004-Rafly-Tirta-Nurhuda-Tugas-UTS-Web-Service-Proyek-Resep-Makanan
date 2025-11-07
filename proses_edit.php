@@ -8,12 +8,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $conn->begin_transaction();
     
     try {
-        // 1. Ambil semua data dari formulir
-        $recipe_id = $_POST['recipe_id'];
-        $judul = $_POST['judul_resep'];
-        $porsi = $_POST['porsi'];
-        $lama_memasak = $_POST['lama_memasak_menit'];
-        $instruksi = $_POST['instruksi_memasak'];
+    // 1. Ambil semua data dari formulir (dengan sanitasi dasar)
+    $recipe_id = isset($_POST['recipe_id']) ? (int)$_POST['recipe_id'] : 0;
+    $judul = isset($_POST['judul_resep']) ? trim($_POST['judul_resep']) : '';
+    $porsi = isset($_POST['porsi']) ? (int)$_POST['porsi'] : null;
+    $lama_memasak = isset($_POST['lama_memasak_menit']) ? (int)$_POST['lama_memasak_menit'] : null;
+    $instruksi = isset($_POST['instruksi_memasak']) ? trim($_POST['instruksi_memasak']) : '';
         
         // 2. Update recipe details
         $sql = "UPDATE recipes 
@@ -56,11 +56,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
             
             foreach ($_POST['ingredients'] as $index => $ingredient_id) {
-                if (empty($ingredient_id)) continue;
-                
+                // basic checks: ingredient id must be present and numeric
+                if (empty($ingredient_id) || !is_numeric($ingredient_id)) continue;
+
+                // ensure corresponding unit and quantity exist
+                if (!isset($_POST['units'][$index]) || !isset($_POST['quantities'][$index])) continue;
+
                 $unit_id = $_POST['units'][$index];
-                $quantity = $_POST['quantities'][$index];
-                
+                $quantity = trim($_POST['quantities'][$index]);
+
+                if ($unit_id === '' || $quantity === '') continue;
+
+                $ingredient_id = (int)$ingredient_id;
+                $unit_id = (int)$unit_id;
+
                 $stmt_insert->bind_param("iiis", $recipe_id, $ingredient_id, $unit_id, $quantity);
                 if (!$stmt_insert->execute()) {
                     throw new Exception("Error inserting ingredient: " . $stmt_insert->error);
