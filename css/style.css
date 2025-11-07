@@ -1,0 +1,165 @@
+/* --- Pengaturan Font & Latar Belakang --- */
+body {
+    font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    background-color: #f8f9fa; /* Latar belakang abu-abu sangat muda */
+    margin: 0;
+    color: #333;
+}
+
+/* --- Kontainer Utama (Dipakai di SEMUA halaman) --- */
+.container {
+    max-width: 1100px;
+    margin: 30px auto; /* Beri jarak atas-bawah */
+    padding: 20px 30px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.07); /* Efek bayangan lebih lembut */
+}
+
+/* --- Judul & Teks (Dipakai di SEMUA halaman) --- */
+h1 {
+    font-size: 2.5rem; /* 40px */
+    color: #2c3e50; /* Biru tua */
+    border-bottom: 3px solid #e74c3c; /* Garis bawah merah */
+    padding-bottom: 10px;
+    display: inline-block; /* Agar garis bawah pas dengan teks */
+}
+h2 {
+    font-size: 1.8rem; /* 28px */
+    color: #34495e; /* Biru abu-abu */
+    margin-top: 40px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: #555;
+}
+
+/* --- Tombol (Dipakai di SEMUA halaman) --- */
+.btn {
+    display: inline-block;
+    padding: 12px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #fff;
+    background-color: #e74c3c; /* Merah cerah */
+    border: none;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background-color 0.2s, transform 0.2s;
+}
+.btn:hover {
+    background-color: #c0392b; /* Merah lebih gelap */
+    transform: translateY(-2px); /* Efek terangkat */
+    text-decoration: none;
+}
+.btn-edit {
+    background-color: #f39c12; /* Kuning */
+}
+.btn-edit:hover {
+    background-color: #e67e22;
+}
+
+/* --- Halaman: index.html --- */
+.recipe-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Responsive */
+    gap: 25px; /* Jarak antar kartu */
+}
+.recipe-card {
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    overflow: hidden; 
+    transition: box-shadow 0.3s, transform 0.3s;
+}
+.recipe-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+.recipe-card h3 {
+    font-size: 1.4rem;
+    margin: 20px 20px 10px 20px;
+}
+.recipe-card h3 a {
+    color: #2c3e50;
+    text-decoration: none;
+}
+.recipe-card h3 a:hover {
+    color: #e74c3c;
+}
+.recipe-card p {
+    font-size: 0.95rem;
+    color: #777;
+    margin: 0 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #f0f0f0;
+}
+.card-actions {
+    padding: 15px 20px;
+    background-color: #fdfdfd;
+}
+.action-link {
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+    margin-right: 15px;
+}
+.action-link.edit {
+    color: #f39c12; /* Kuning */
+}
+.action-link.delete {
+    color: #95a5a6; /* Abu-abu */
+}
+
+/* --- Halaman: tambah.html & edit.html --- */
+.form-group { 
+    margin-bottom: 20px; 
+}
+.form-group label { 
+    display: block; 
+    font-weight: bold; 
+    margin-bottom: 5px; 
+}
+.form-group input[type="text"],
+.form-group input[type="number"],
+.form-group textarea,
+.form-group select {
+    width: 100%; 
+    padding: 10px; 
+    font-size: 14px;
+    border: 1px solid #ccc; 
+    border-radius: 8px; /* Dibuat lebih bulat */
+    box-sizing: border-box; 
+}
+
+/* --- Halaman: detail.html --- */
+.recipe-meta {
+    font-size: 1rem; /* Sedikit lebih besar */
+    color: #555; 
+    background-color: #f9f9f9;
+    border: 1px solid #eee; 
+    padding: 20px; 
+    border-radius: 8px;
+}
+.ingredients-list { 
+    list-style-type: none; 
+    padding-left: 0; 
+}
+.ingredients-list li {
+    background-color: #fafafa; 
+    border-bottom: 1px dashed #eee;
+    padding: 12px 5px; 
+    font-size: 1.1rem; /* Sedikit lebih besar */
+}
+.ingredients-list li:first-child { 
+    border-top: 1px dashed #eee; 
+}
+.instructions {
+    line-height: 1.8; /* Lebih mudah dibaca */
+    font-size: 1.1rem;
+    white-space: pre-wrap;
+}
